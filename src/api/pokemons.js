@@ -7,23 +7,23 @@
  * There are some helper functions which makes this task easier, but please try to implement your own filter and search logic.
  */
 import pokemons from 'json-pokemon';
+import { createNoPokemons } from './elements';
 // console.log(pokemons);
-
-export function getPokemonsByName(pokemonName) {
-  const selection = pokemons.filter(({ name }) => name.match('Pik'));
-
-  return selection;
+export function getAllPokemons() {
+  return pokemons;
 }
 
-// let filterPoke = (name) => {
-//   return pokemons.filter(data => {
-//     return (data.toLowerCase().indexOf(name.toLowerCase()) > -1);
-//   });
-// };
+export function getPokemonsByName(pokemonName) {
+  const normalizedName = pokemonName.toLowerCase();
+  const pickPokemons = pokemons.filter(pokemon => {
+    const normalizedPokemonName = pokemon.name.toLowerCase();
+    return normalizedPokemonName.startsWith(normalizedName);
+  });
 
-// console.log(filterPoke('piku')
+  return pickPokemons;
 
-// console.log(pokemons)
+  // export function invalidInput ()
+}
 
 export function sortPokemonsByName(pokemons, sortDirection = 'ASC') {
   /**

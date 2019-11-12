@@ -14,17 +14,23 @@ export function createNoPokemons() {
 }
 // console.log(pokemons.find('Pikachu'));
 
-export function createPokemons(pokemons) {
-  // const pokemonFind = pokemons.filter(obj => {
-  //   return obj.name === "Pikachu";
-  // console.log(pokemonName);
+export function createPokemonElements(pokemons) {
+  const listElement = document.createElement('ul');
+  pokemons.forEach(pokemon => {
+    const pokemonElement = createPokemonElement(pokemon);
+    listElement.appendChild(pokemonElement);
+  });
+  return listElement;
   /**
    * This function could receive an array of pokemons and creates elements for each of them.
    * You can use createPokemon to create a single element.
    */
 }
 
-export function createPokemon(pokemon) {
+export function createPokemonElement(pokemon) {
+  const itemElement = document.createElement('li');
+  itemElement.innerHTML = pokemon.name;
+  return itemElement;
   /**
    * This function could create a new element and displays the properties of a pokemon.
    */
