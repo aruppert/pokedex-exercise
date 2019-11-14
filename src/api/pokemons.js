@@ -1,16 +1,22 @@
-/**
- * json-pokemon is a package which is installed with `npm i json-pokemon`.
- * See https://www.npmjs.com/package/json-pokemon
- *
- * You will find details about the properties of a pokemon.
- *
- * There are some helper functions which makes this task easier, but please try to implement your own filter and search logic.
- */
-// import pokemons from 'json-pokemon';
-import pokemons from './pokemon.json';
-import { createNoPokemons } from './elements';
-import { all } from 'q';
+// import pokemons from './pokemon.json';
+// import { createNoPokemons } from './elements';
+// import { all } from 'q';
 // console.log(pokemons);
+
+let pokemons = [];
+
+export async function initPokemons() {
+  const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=1000');
+  const data = await response.json();
+  pokemons = data.results;
+}
+
+export async function getPokemonDetails(pokemonUrl) {
+  const response = await fetch(pokemonUrl);
+  const data = await response.json();
+  return data;
+}
+
 export function getAllPokemons() {
   return pokemons;
 }
@@ -27,7 +33,7 @@ export function getPokemonsByName(pokemonName) {
   // export function invalidInput ()
 }
 
-export function sortPokemonsByName(pokemons, sortDirection = 'DESC') {
+export function sortPokemonsByName(pokemons, sortDirection = 'ASC') {
   // const allPokemons = pokemons;
 
   // pokemons.name.sort(function(a, b) {
